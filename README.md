@@ -56,3 +56,4 @@ https://rayfoodiefun.herokuapp.com/
 | POST | / | Adds a new rating |  restaurant_id | food_rating, drinks_rating, decor_rating, service_rating, cleaniness_rating, vibe |
 | PUT | /:id | Updates an rating |  |
 | DELETE | /:id| Deletes an rating |  |
+

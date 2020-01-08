@@ -34,3 +34,10 @@ function deleteRest(id) {
     .where({ id })
     .del();
 }
+
+function getReviewByRest(id) {
+    return db("reviews")
+        .select("*")
+        .join("restaurants", "review.restaurant_id", "restaurant.id")
+        .where("restaurant_id", id)
+}

@@ -3,6 +3,21 @@ const router = require("express").Router();
 const Rests = require("./restaurant-model.js");
 const restricted = require("../auth/restricted-middleware.js");
 
+router.get("/:id/reviews", restricted, (req, res) => {
+  const { id } = req.params;
+
+  Rests.findRestById(id)
+    .then(reviews => {
+      res.status(201).json(reviews);
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "Server was unable to retrieve Reviews" });
+    });
+});
+
 router.post("/", restricted, (req, res) => {
   const newRest = req.body;
   const { name, location, cuisine, foodie_id } = req.body;
@@ -50,13 +65,15 @@ router.put("/:id", restricted, (req, res) => {
 });
 
 router.delete("/:id", restricted, (req, res) => {
-    const { id } = req.params
-Restaurant
-    Rests.findRestById(id)
+  const { id } = req.params;
+  Restaurant;
+  Rests.findRestById(id)
     .then(rest => {
       if (rest) {
         Rests.deleteRest(id).then(deleted => {
-          res.status(204).json({ message: `Restaurant ${deleted} was deleted` });
+          res
+            .status(204)
+            .json({ message: `Restaurant ${deleted} was deleted` });
         });
       } else {
         res.status(404).json({ message: "Unable to find Restaurant" });
@@ -64,6 +81,10 @@ Restaurant
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ message: "Server was unable to delete Restaurant" });
+      res
+        .status(500)
+        .json({ message: "Server was unable to delete Restaurant" });
     });
-})
+});
+
+module.exports = router;

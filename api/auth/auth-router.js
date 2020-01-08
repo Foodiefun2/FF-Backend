@@ -38,7 +38,7 @@ router.post("/login", (req, res) => {
 
         res
           .status(200)
-          .json({ token, message: `Welcome ${user.username} to FoodieFun` });
+          .json({ token, user, message: `Welcome ${user.username} to FoodieFun` });
       } else {
         res.status(401).json({ message: "Invalid credentials" });
       }

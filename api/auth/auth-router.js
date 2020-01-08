@@ -6,8 +6,8 @@ const Users = require("../users/users-model.js");
 
 router.post("/register", (req, res) => {
   const { username, password, email, location } = req.body;
-  const hash = bcrypt.hashSync(password, 12);
-  password = hash;
+  const hash = bcrypt.hashSync(req.body.password, 12);
+  req.body.password = hash;
 
   if (!username || !password || !location || !email) {
     res.status(400).json({

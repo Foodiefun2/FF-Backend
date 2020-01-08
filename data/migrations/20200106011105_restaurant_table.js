@@ -4,15 +4,13 @@ exports.up = function(knex) {
 
     restaurants.string("name").notNullable();
 
-    restaurants.string("type_of_cuisine").notNullable();
+    restaurants.string("cuisine").notNullable();
 
     restaurants.string("location").notNullable();
 
-    restaurants.string("hours_of_operations").notNullable();
+    restaurants.string("hours")
 
-    restaurants.integer("rating", 1).notNullable();
-
-    restaurants.string("review").notNullable()
+    restaurants.string("review")
 
     restaurants.string("img").unique();
 

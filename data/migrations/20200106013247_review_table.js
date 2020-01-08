@@ -4,18 +4,18 @@ exports.up = function(knex) {
 
     reviews.string("menu_item").notNullable();
 
-    reviews.string("cuisine_type").notNullable();
+    reviews.string("cuisine");
 
-    reviews.integer("price").notNullable();
+    reviews.integer("price");
 
-    reviews.integer("rating", 1).notNullable();
+    reviews.integer("rating", 3).notNullable();
 
     reviews.string("review").notNullable();
 
     reviews.string("img").unique();
 
     reviews
-      .integer("user_id")
+      .integer("foodie_id")
       .unsigned()
       .notNullable()
       .references("id")

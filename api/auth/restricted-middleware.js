@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
 
     jwt.verify(authorization, secret, function(err, decodedToken) {
       if (err) {
-        res.status(401).json({ message: "User is not athenticated" });
+        res.status(401).json({ message: "User is not authenticated" });
       } else {
         req.token = decodedToken;
         next();

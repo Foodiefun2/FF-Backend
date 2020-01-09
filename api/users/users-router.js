@@ -7,7 +7,7 @@ const restricted = require("../auth/restricted-middleware.js");
 router.get("/:id/restaurants", restricted, (req, res) => {
   const { id } = req.params;
 
-  Users.findRestByUsers(id)
+  Users.findRestByUser(id)
     .then(rests => {
       res.status(201).json(rests);
     })
@@ -16,6 +16,21 @@ router.get("/:id/restaurants", restricted, (req, res) => {
       res
         .status(500)
         .json({ message: "Server was unable to retrieve Restaurants" });
+    });
+});
+
+router.get("/:id/reviews", restricted, (req, res) => {
+  const { id } = req.params;
+
+  Users.getReviewByUser(id)
+    .then(reviews => {
+      res.status(201).json(reviews);
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "Server was unable to retrieve Reviews" });
     });
 });
 
@@ -61,4 +76,4 @@ router.delete("/:id", restricted, (req, res) => {
     });
 });
 
-module.exports = router
+module.exports = router;

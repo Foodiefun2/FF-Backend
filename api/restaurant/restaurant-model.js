@@ -4,8 +4,27 @@ module.exports = {
   findRestById,
   addRest,
   updateRest,
-  deleteRest
+  deleteRest,
+  getReviewByRest,
+  getRatingByRest,
+  getRests
 };
+
+function getRests() {
+  return db("restaurants");
+}
+
+function getRatingByRest(id) {
+  return db("ratings")
+    .select("*")
+    .where("restaurant_id", id);
+}
+
+function getReviewByRest(id) {
+  return db("reviews")
+    .select("*")
+    .where("restaurant_id", id);
+}
 
 function findRestById(id) {
   return db("restaurants")
@@ -33,11 +52,4 @@ function deleteRest(id) {
   return db("restaurants")
     .where({ id })
     .del();
-}
-
-function getReviewByRest(id) {
-    return db("reviews")
-        .select("*")
-        .join("restaurants", "review.restaurant_id", "restaurant.id")
-        .where("restaurant_id", id)
 }

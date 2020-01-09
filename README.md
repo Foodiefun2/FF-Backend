@@ -14,8 +14,8 @@ https://rayfoodiefun.herokuapp.com/
 
 | Method | Endpoint| Description | Requirements |
 |:--------:|:-------:|:--------------------------:|:-----------------------------:|
-| POST | /register | Registers a new User | username, password, email, location |
-| POST | /login | Signs in a User | username, password |
+| POST | /register | Registers a new User | username(str), password(str), email(str), location(str) |
+| POST | /login | Signs in a User | username(str), password(str) |
 
 <h4>User Routes:</h4>
 
@@ -23,6 +23,8 @@ https://rayfoodiefun.herokuapp.com/
 
 | Method | Endpoint| Description | Requirements |
 |:-----:|:-----:|:-----:|:-----:|
+| GET | / | Gets all users | |
+| GET | /:id | Gets User with all info | |
 | GET | /:id/restaurants | Gets all Restaurants created by User |  |
 | GET | /:id/reviews | Get all reviews by User | |
 | PUT | /:id | Updates an User |  |
@@ -35,9 +37,10 @@ https://rayfoodiefun.herokuapp.com/
 | Method | Endpoint| Description | Requirements | Optional |
 |:-----:|:-----:|:-----:|:-----:| :-----: |
 | GET | / | Gets all Restaurants | | |
+| GET | /:id | Gets a Restaurant | | |
 | GET | /:id/ratings | Gets all ratings for Restaurant | | |
 | GET | /:id/reviews | Gets all reviews for Restaurant | | |
-| POST | / | Adds a new restaurant | name, cuisine, location, foodie_id | img, hours, review |
+| POST | / | Adds a new restaurant | name(str), cuisine(str), location(int), foodie_id(int) | img(str), hours(int), review(str) |
 | PUT | /:id | Updates an Restaurant |  |
 | DELETE | /:id| Deletes an Restaurant |  |
 
@@ -47,7 +50,7 @@ https://rayfoodiefun.herokuapp.com/
 
 | Method | Endpoint| Description | Requirements | Optional |
 |:-----:|:-----:|:-----:|:-----:| :-----: |
-| POST | / | Adds a new review | menu_item, rating, review, foodie_id, restaurant_id | img, price, cuisine |
+| POST | / | Adds a new review | menu_item(str), rating(int), review(str), foodie_id(int), restaurant_id(int) | img(str), price(int), cuisine(str) |
 | PUT | /:id | Updates an review |  |
 | DELETE | /:id| Deletes an review |  |
 
@@ -57,6 +60,6 @@ https://rayfoodiefun.herokuapp.com/
 
 | Method | Endpoint| Description | Requirements | Optional |
 |:-----:|:-----:|:-----:|:-----:| :-----: |
-| POST | / | Adds a new rating |  restaurant_id | food_rating, drinks_rating, decor_rating, service_rating, cleaniness_rating, vibe |
+| POST | / | Adds a new rating |  restaurant_id(int), foodie_id(int) | food_rating(int), drinks_rating(int), decor_rating(int), service_rating(int), cleanliness_rating(int), vibe(str) |
 | PUT | /:id | Updates an rating |  |
 | DELETE | /:id| Deletes an rating |  |

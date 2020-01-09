@@ -8,13 +8,13 @@ module.exports = {
 };
 
 function findRatingById(id) {
-  return db("ratings")
+  return db("rest_ratings")
     .select("*")
     .where({ id });
 }
 
 function addRating(rating) {
-  return db("ratings")
+  return db("rest_ratings")
     .insert(rating, "id")
     .then(ids => {
       const [id] = ids;
@@ -24,13 +24,17 @@ function addRating(rating) {
 }
 
 function updateRating(id, changes) {
-  return db("ratings")
+  return db("rest_ratings")
     .where({ id })
-    .update(changes, "*");
+    .update(changes, "*")
+    .then(() => {
+        return findRatingById(id);
+      });
 }
 
 function deleteRating(id) {
-  return db("ratings")
+  return db("rest_ratings")
     .where({ id })
     .del();
 }
+

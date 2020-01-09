@@ -29,7 +29,7 @@ router.put("/:id", restricted, (req, res) => {
     .then(rating => {
       if (rating) {
         Ratings.updateRating(id, changes).then(updatedRating => {
-          res.status(200).json(updateRating);
+          res.status(200).json(updatedRating);
         });
       } else {
         res.status(400).json({ message: "Unable to find Rating" });
@@ -48,7 +48,7 @@ router.delete("/:id", restricted, (req, res) => {
     .then(rating => {
       if (rating) {
         Ratings.deleteRating(id).then(deleted => {
-          res.status(204).json({ message: `Rating ${deleted} was deleted` });
+          res.status(204).json({ message: `${deleted} Rating was deleted`, rating });
         });
       } else {
         res.status(400).json({ message: "Unable to find Rating" });

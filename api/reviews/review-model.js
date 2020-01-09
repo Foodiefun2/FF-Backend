@@ -26,7 +26,10 @@ function addReview(review) {
 function updateReview(id, changes) {
   return db("reviews")
     .where({ id })
-    .update(changes, "*");
+    .update(changes, "*")
+    .then(() => {
+      return findReviewById(id);
+    });
 }
 
 function deleteReview(id) {

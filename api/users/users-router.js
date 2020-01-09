@@ -4,6 +4,30 @@ const bcrypt = require("bcryptjs");
 const Users = require("./users-model.js");
 const restricted = require("../auth/restricted-middleware.js");
 
+router.get("/", restricted, (req, res) => {
+  Users.getUsersReviews()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: "Server was unable to get Users" });
+    });
+});
+
+router.get("/:id", restricted, (req, res) => {
+  const { id } = req.params;
+
+  Users.get(id)
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: "Server was unable to get User" });
+    });
+});
+
 router.get("/:id/restaurants", restricted, (req, res) => {
   const { id } = req.params;
 
@@ -44,8 +68,11 @@ router.put("/:id", restricted, (req, res) => {
   Users.findUserById(id)
     .then(user => {
       if (user) {
-        Users.update(id, changes).then(updatedUser => {
-          res.status(200).json(updatedUser);
+        Users.updateUser(id, changes).then(updatedUser => {
+          res.status(200).json({
+            message: `${updatedUser.username} was updated`,
+            updatedUser
+          });
         });
       } else {
         res.status(404).json({ message: "Unable to find User" });
@@ -64,7 +91,9 @@ router.delete("/:id", restricted, (req, res) => {
     .then(user => {
       if (user) {
         Users.deleteUser(id).then(deleted => {
-          res.status(204).json({ message: `User ${deleted} was deleted` });
+          res
+            .status(200)
+            .json({ message: `${deleted} User was deleted` });
         });
       } else {
         res.status(404).json({ message: "Unable to find User" });

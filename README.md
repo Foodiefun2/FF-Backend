@@ -50,7 +50,7 @@ https://rayfoodiefun.herokuapp.com/
 
 | Method | Endpoint| Description | Requirements | Optional |
 |:-----:|:-----:|:-----:|:-----:| :-----: |
-| POST | / | Adds a new review | menu_item(str), rating(int), review(str), foodie_id(int), restaurant_id(int) | img(str), price(int), cuisine(str) |
+| POST | / | Adds a new review | menu_item(str), rating(str), review(str), foodie_id(int), restaurant_id(int) | img(str), price(str), cuisine(str) |
 | PUT | /:id | Updates an review |  |
 | DELETE | /:id| Deletes an review |  |
 
@@ -60,6 +60,6 @@ https://rayfoodiefun.herokuapp.com/
 
 | Method | Endpoint| Description | Requirements | Optional |
 |:-----:|:-----:|:-----:|:-----:| :-----: |
-| POST | / | Adds a new rating |  restaurant_id(int), foodie_id(int) | food_rating(int), drinks_rating(int), decor_rating(int), service_rating(int), cleanliness_rating(int), vibe(str) |
+| POST | / | Adds a new rating |  restaurant_id(int), foodie_id(int) | food_rating(str), drinks_rating(str), decor_rating(str), service_rating(str), cleanliness_rating(str), vibe(str) |
 | PUT | /:id | Updates an rating |  |
 | DELETE | /:id| Deletes an rating |  |

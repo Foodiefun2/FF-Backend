@@ -6,9 +6,9 @@ exports.up = function(knex) {
 
     reviews.string("cuisine");
 
-    reviews.integer("price");
+    reviews.string("price");
 
-    reviews.integer("rating", 3).notNullable();
+    reviews.string("rating", 3).notNullable();
 
     reviews.string("review").notNullable();
 

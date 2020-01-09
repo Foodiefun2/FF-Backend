@@ -2,15 +2,15 @@ exports.up = function(knex) {
   return knex.schema.createTable("rest_ratings", tbl => {
     tbl.increments();
 
-    tbl.integer("food_rating", 3);
+    tbl.string("food_rating", 3);
 
-    tbl.integer("drinks_rating", 3);
+    tbl.string("drinks_rating", 3);
 
-    tbl.integer("decor_rating", 3);
+    tbl.string("decor_rating", 3);
 
-    tbl.integer("service_rating", 3);
+    tbl.string("service_rating", 3);
 
-    tbl.integer("cleanliness_rating", 3);
+    tbl.string("cleanliness_rating", 3);
 
     tbl.string("vibe")
 

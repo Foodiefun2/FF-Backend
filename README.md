@@ -4,7 +4,17 @@
 https://rayfoodiefun.herokuapp.com/
 
 <h3>Backend Frameworks:</h3>
-
+bcryptjs<br>
+cors<br>
+dotenv<br>
+express<br>
+helmet<br>
+jsonwebtoken<br>
+knex<br>
+knex-cleaner<br>
+morgan<br>
+pg<br>
+sqlite3<br>
 
 <h3>Routes:</h3>
 

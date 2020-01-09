@@ -7,11 +7,12 @@ router.post("/", restricted, (req, res) => {
   const newReview = req.body;
   const { menu_item, rating, review, foodie_id, restaurant_id } = req.body;
 
-  if (!foodie_id || !restaurant_id) {
-    res
-      .status(400)
-      .json({ message: "Please add a foodie_id and a restaurant_id" });
-  } else if (!menu_item || !rating || !review) {
+  // if (!foodie_id || !restaurant_id) {
+  //   res
+  //     .status(400)
+  //     .json({ message: "Please add a foodie_id and a restaurant_id" });
+  // } else 
+  if (!menu_item || !rating || !review) {
     res
       .status(400)
       .json({ message: "Please add a menu_item, rating, and review" });

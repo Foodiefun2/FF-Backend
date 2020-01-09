@@ -10,7 +10,8 @@ module.exports = {
 function findRatingById(id) {
   return db("rest_ratings")
     .select("*")
-    .where({ id });
+    .where({ id })
+    .first();
 }
 
 function addRating(rating) {
@@ -28,8 +29,8 @@ function updateRating(id, changes) {
     .where({ id })
     .update(changes, "*")
     .then(() => {
-        return findRatingById(id);
-      });
+      return findRatingById(id);
+    });
 }
 
 function deleteRating(id) {
@@ -37,4 +38,3 @@ function deleteRating(id) {
     .where({ id })
     .del();
 }
-

@@ -10,7 +10,8 @@ module.exports = {
 function findReviewById(id) {
   return db("reviews")
     .select("*")
-    .where({ id });
+    .where({ id })
+    .first();
 }
 
 function addReview(review) {

@@ -16,7 +16,7 @@ router.post("/", restricted, (req, res) => {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({ message: "Server was unable to create Rating" });
+        res.status(500).json({ message: "Server was unable to create Rating", err });
       });
   }
 });

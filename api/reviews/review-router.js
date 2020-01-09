@@ -5,14 +5,13 @@ const restricted = require("../auth/restricted-middleware.js");
 
 router.post("/", restricted, (req, res) => {
   const newReview = req.body;
-  const { menu_item, rating, review, foodie_id, restaurant_id } = req.body;
+  // const { menu_item, rating, review, foodie_id, restaurant_id } = req.body;
 
-  // if (!foodie_id || !restaurant_id) {
-  //   res
-  //     .status(400)
-  //     .json({ message: "Please add a foodie_id and a restaurant_id" });
-  // } else 
-  if (!menu_item || !rating || !review) {
+  if (!req.body.foodie_id || !req.body.restaurant_id) {
+    res
+      .status(400)
+      .json({ message: "Please add a foodie_id and a restaurant_id" });
+  } else if (!req.body.menu_item || !req.body.rating || !req.body.review) {
     res
       .status(400)
       .json({ message: "Please add a menu_item, rating, and review" });

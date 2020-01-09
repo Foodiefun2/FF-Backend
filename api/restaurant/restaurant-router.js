@@ -81,7 +81,7 @@ router.post("/", restricted, (req, res) => {
         console.log(err);
         res
           .status(500)
-          .json({ message: "Server was unable to create Restaurant" });
+          .json({ message: "Server was unable to create Restaurant", err });
       });
   }
 });

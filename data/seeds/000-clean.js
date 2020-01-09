@@ -1,0 +1,11 @@
+var knexCleaner = require('knex-cleaner');
+
+exports.seed = function(knex) {
+  knexCleaner.clean(knex, options)
+};
+
+var options = {
+  mode: 'truncate', // Valid options 'truncate', 'delete'
+  restartIdentity: true, // Used to tell PostgresSQL to reset the ID counter
+  ignoreTables: ['knex_migrations', 'knex_migrations_lock']
+}

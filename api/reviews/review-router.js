@@ -47,14 +47,14 @@ router.put("/:id", restricted, (req, res) => {
     });
 });
 
-router.delete(":id", restricted, (req, res) => {
+router.delete("/:id", restricted, (req, res) => {
   const { id } = req.params;
 
   Reviews.findReviewById(id)
     .then(review => {
       if (review) {
         Reviews.deleteReview(id).then(deleted => {
-          res.status(204).json({ message: `Review ${deleted} was deleted` });
+          res.status(204).json({ message: `${deleted} Review was deleted` });
         });
       } else {
         res.status(404).json({ message: "Unable to find Review" });
@@ -65,4 +65,5 @@ router.delete(":id", restricted, (req, res) => {
       res.status(500).json({ message: "Server was unable to delete Review" });
     });
 });
+
 module.exports = router;

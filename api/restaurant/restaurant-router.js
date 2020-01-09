@@ -4,7 +4,7 @@ const Rests = require("./restaurant-model.js");
 const restricted = require("../auth/restricted-middleware.js");
 
 router.get("/", restricted, (req, res) => {
-  Rests.getRests()
+  Rests.getRestaurantsWithReviews()
     .then(rests => {
       res.status(200).json(rests);
     })
@@ -15,6 +15,22 @@ router.get("/", restricted, (req, res) => {
         .json({ message: "Server was unable to retrieve Restaurants" });
     });
 });
+
+router.get("/:id", restricted, (req, res) => {
+  const { id } = req.params
+
+  Rests.get(id)
+    .then(rest => {
+      res.status(200).json(rest);
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "Server was unable to retrieve Restaurants" });
+    });
+});
+
 
 router.get("/:id/ratings", restricted, (req, res) => {
   const { id } = req.params;
@@ -101,7 +117,7 @@ router.delete("/:id", restricted, (req, res) => {
         Rests.deleteRest(id).then(deleted => {
           res
             .status(204)
-            .json({ message: `Restaurant ${deleted} was deleted` });
+            .json({ message: `${deleted} Restaurant was deleted` });
         });
       } else {
         res.status(404).json({ message: "Unable to find Restaurant" });

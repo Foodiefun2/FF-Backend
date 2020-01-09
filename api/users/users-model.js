@@ -8,7 +8,9 @@ module.exports = {
   updateUser,
   deleteUser,
   findRestByUser,
-  getReviewByUser
+  getReviewByUser,
+  getUsersReviews,
+  get
 };
 
 function findUser() {
@@ -40,7 +42,10 @@ function deleteUser(id) {
 function updateUser(id, changes) {
   return db("users")
     .where({ id })
-    .update(changes, "*");
+    .update(changes, "*")
+    .then(() => {
+      return findUserById(id);
+    });
 }
 
 function findRestByUser(id) {
@@ -50,7 +55,42 @@ function findRestByUser(id) {
 }
 
 function getReviewByUser(id) {
-    return db("reviews")
-        .select("*")
-        .where("foodie_id", id)
+  return db("reviews")
+    .select("*")
+    .where("foodie_id", id);
+}
+
+function getUsersReviews() {
+  const users = db("users");
+
+  const newUsersArray = users.map(user => {
+    return get(user.id);
+  });
+
+  return newUsersArray;
+}
+
+function get(id) {
+  const users = db("users");
+
+  if (id) {
+    users.where({ id }).first();
+
+    const promises = [users, findRestByUser(id), getReviewByUser(id)];
+
+    return Promise.all(promises).then(results => {
+      const [user, restaurants, reviews] = results;
+
+      if (user) {
+        user.restaurants = restaurants;
+        user.reviews = reviews;
+
+        return user;
+      } else {
+        return null;
+      }
+    });
+  }
+
+  return users;
 }

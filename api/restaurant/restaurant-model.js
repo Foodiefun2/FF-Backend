@@ -7,15 +7,12 @@ module.exports = {
   deleteRest,
   getReviewByRest,
   getRatingByRest,
-  getRests
+  getRestaurantsWithReviews,
+  get
 };
 
-function getRests() {
-  return db("restaurants");
-}
-
 function getRatingByRest(id) {
-  return db("ratings")
+  return db("rest_ratings")
     .select("*")
     .where("restaurant_id", id);
 }
@@ -45,11 +42,49 @@ function addRest(rest) {
 function updateRest(id, changes) {
   return db("restaurants")
     .where({ id })
-    .update(changes, "*");
+    .update(changes, "*")
+    .then(() => {
+      return findRestById(id)
+    })
 }
 
 function deleteRest(id) {
   return db("restaurants")
     .where({ id })
     .del();
+}
+
+function getRestaurantsWithReviews() {
+  let restaurants = db("restaurant");
+
+  let newRestaurantArray = restaurants.map(restaurant => {
+    return this.get(restaurant.id);
+  });
+
+  return newRestaurantArray;
+}
+
+function get(id) {
+  const restaurants = db("restaurants");
+
+  if (id) {
+    restaurants.where({ id }).first();
+
+    const promises = [restaurants, getReviewByRest(id), getRatingByRest(id)];
+
+    return Promise.all(promises).then(results => {
+      const [restaurant, reviews, ratings] = results;
+
+      if (restaurant) {
+        restaurant.reviews = reviews;
+        restaurant.ratings = ratings;
+
+        return restaurant;
+      } else {
+        return null;
+      }
+    });
+  }
+
+  return restaurants;
 }

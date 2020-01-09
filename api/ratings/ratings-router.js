@@ -5,10 +5,10 @@ const restricted = require("../auth/restricted-middleware.js");
 
 router.post("/", restricted, (req, res) => {
   const newRating = req.body;
-  const { restaurant_id } = req.body;
+  // const { restaurant_id } = req.body;
 
-  if (!restaurant_id) {
-    res.status(400).json({ message: "Please add a restaurant_id" });
+  if (!req.body.restaurant_id || !req.body.foodie_id) {
+    res.status(400).json({ message: "Please add a restaurant_id and a foodie_id" });
   } else {
     Ratings.addRating(newRating)
       .then(rating => {

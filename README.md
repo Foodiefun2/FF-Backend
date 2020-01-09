@@ -60,6 +60,6 @@ https://rayfoodiefun.herokuapp.com/
 
 | Method | Endpoint| Description | Requirements | Optional |
 |:-----:|:-----:|:-----:|:-----:| :-----: |
-| POST | / | Adds a new rating |  restaurant_id(int) | food_rating(int), drinks_rating(int), decor_rating(int), service_rating(int), cleaniness_rating(int), vibe(str) |
+| POST | / | Adds a new rating |  restaurant_id(int), foodie_id(int) | food_rating(int), drinks_rating(int), decor_rating(int), service_rating(int), cleanliness_rating(int), vibe(str) |
 | PUT | /:id | Updates an rating |  |
 | DELETE | /:id| Deletes an rating |  |

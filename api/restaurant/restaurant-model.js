@@ -55,10 +55,10 @@ function deleteRest(id) {
 }
 
 function getRestaurantsWithReviews() {
-  let restaurants = db("restaurant");
+  let restaurants = db("restaurants");
 
   let newRestaurantArray = restaurants.map(restaurant => {
-    return this.get(restaurant.id);
+    return get(restaurant.id);
   });
 
   return newRestaurantArray;

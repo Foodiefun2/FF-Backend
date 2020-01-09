@@ -10,7 +10,7 @@ exports.up = function(knex) {
 
     tbl.integer("service_rating", 3);
 
-    tbl.integer("cleaniness_rating", 3);
+    tbl.integer("cleanliness_rating", 3);
 
     tbl.string("vibe")
 
@@ -20,6 +20,15 @@ exports.up = function(knex) {
       .notNullable()
       .references("id")
       .inTable("restaurants")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE");
+
+      tbl
+      .integer("foodie_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("users")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
   });

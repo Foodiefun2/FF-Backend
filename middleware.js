@@ -5,7 +5,7 @@ const cors = require("cors");
 
 module.exports = server => {
   server.use(express.json());
-  server.use(cors({ credentials: true, origin: "localhost:3000" }));
+  server.use(cors({ credentials: true, origin: "http://localhost:3000" }));
   server.use(helmet());
   server.use(morgan("tiny"));
 };

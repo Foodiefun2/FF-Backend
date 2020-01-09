@@ -26,7 +26,8 @@ function getReviewByRest(id) {
 function findRestById(id) {
   return db("restaurants")
     .select("*")
-    .where({ id });
+    .where({ id })
+    .first();
 }
 
 function addRest(rest) {
@@ -44,8 +45,8 @@ function updateRest(id, changes) {
     .where({ id })
     .update(changes, "*")
     .then(() => {
-      return findRestById(id)
-    })
+      return findRestById(id);
+    });
 }
 
 function deleteRest(id) {

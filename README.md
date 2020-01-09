@@ -24,6 +24,7 @@ https://rayfoodiefun.herokuapp.com/
 | Method | Endpoint| Description | Requirements |
 |:-----:|:-----:|:-----:|:-----:|
 | GET | /:id/restaurants | Gets all Restaurants created by User |  |
+| GET | /:id/reviews | Get all reviews by User | |
 | PUT | /:id | Updates an User |  |
 | DELETE | /:id| Deletes an User |  |
 
@@ -33,6 +34,9 @@ https://rayfoodiefun.herokuapp.com/
 
 | Method | Endpoint| Description | Requirements | Optional |
 |:-----:|:-----:|:-----:|:-----:| :-----: |
+| GET | / | Gets all Restaurants | | |
+| GET | /:id/ratings | Gets all ratings for Restaurant | | |
+| GET | /:id/reviews | Gets all reviews for Restaurant | | |
 | POST | / | Adds a new restaurant | name, cuisine, location, foodie_id | img, hours, review |
 | PUT | /:id | Updates an Restaurant |  |
 | DELETE | /:id| Deletes an Restaurant |  |

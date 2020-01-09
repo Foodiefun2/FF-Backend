@@ -7,7 +7,8 @@ module.exports = {
   findUserById,
   updateUser,
   deleteUser,
-  findRestByUsers
+  findRestByUser,
+  getReviewByUser
 };
 
 function findUser() {
@@ -42,9 +43,14 @@ function updateUser(id, changes) {
     .update(changes, "*");
 }
 
-function findRestByUsers(id) {
+function findRestByUser(id) {
   return db("restaurants")
     .select("*")
-    .join("users", "restaurants.foodie_id", "users.id")
     .where("foodie_id", id);
+}
+
+function getReviewByUser(id) {
+    return db("reviews")
+        .select("*")
+        .where("foodie_id", id)
 }

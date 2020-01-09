@@ -3,12 +3,40 @@ const router = require("express").Router();
 const Rests = require("./restaurant-model.js");
 const restricted = require("../auth/restricted-middleware.js");
 
+router.get("/", restricted, (req, res) => {
+  Rests.getRests()
+    .then(rests => {
+      res.status(200).json(rests);
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "Server was unable to retrieve Restaurants" });
+    });
+});
+
+router.get("/:id/ratings", restricted, (req, res) => {
+  const { id } = req.params;
+
+  Rests.getRatingByRest(id)
+    .then(ratings => {
+      res.status(200).json(ratings);
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "Server was unable to retrieve Ratings" });
+    });
+});
+
 router.get("/:id/reviews", restricted, (req, res) => {
   const { id } = req.params;
 
-  Rests.findRestById(id)
+  Rests.getReviewByRest(id)
     .then(reviews => {
-      res.status(201).json(reviews);
+      res.status(200).json(reviews);
     })
     .catch(err => {
       console.log(err);
@@ -23,7 +51,7 @@ router.post("/", restricted, (req, res) => {
   const { name, location, cuisine, foodie_id } = req.body;
 
   if (!foodie_id) {
-    res.status(400).json({ message: "Please add foodie_id" });
+    res.status(400).json({ message: "Please add a foodie_id" });
   } else if (!name || !location || !cuisine) {
     res
       .status(400)
@@ -66,7 +94,7 @@ router.put("/:id", restricted, (req, res) => {
 
 router.delete("/:id", restricted, (req, res) => {
   const { id } = req.params;
-  Restaurant;
+
   Rests.findRestById(id)
     .then(rest => {
       if (rest) {
